@@ -9,5 +9,7 @@ Route::get('/', function () {
 Route::get('user', function () {
     \App\Models\User::factory(10)->create();
     
-    return response()->json(status: 204);
+    return response()->json([
+        'status' => 'ok',
+    ]);
 });
