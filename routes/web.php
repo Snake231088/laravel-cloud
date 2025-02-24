@@ -7,7 +7,7 @@ Route::get('/', function () {
 });
 
 Route::get('user', function () {
-    \App\Models\User::factory(10)->create();
+    \App\Models\User::factory(100000)->create();
     
     return response()->json([
         'status' => 'ok',
