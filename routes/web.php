@@ -13,3 +13,7 @@ Route::get('user', function () {
         'status' => 'ok',
     ]);
 });
+
+Route::get('users', function () {
+    return \App\Models\User::get();
+});
