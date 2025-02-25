@@ -13,7 +13,7 @@ class CreateUsers extends Command
      *
      * @var string
      */
-    protected $signature = 'app:create-users {count}';
+    protected $signature = 'app:create-users {loops}';
 
     /**
      * The console command description.
@@ -27,19 +27,22 @@ class CreateUsers extends Command
      */
     public function handle()
     {
-        $count = $this->argument('count');
+        $loops = $this->argument('loops');
         
-        $users = [];
-        for ($i = 0; $i < $count; $i++) {
-            $users[] = [
-                'name' => Str::random(),
-                'email' => Str::uuid()->toString() . Str::random() . '@example.com',
-                'email_verified_at' => now(),
-                'password' => '',
-                'remember_token' => Str::random(10),
-            ];
+        
+        for ($i = 0; $i < $loops; $i++) {
+            $users = [];
+            for ($j = 0; $j < 10000; $j++) {
+                $users[] = [
+                    'name' => Str::random(),
+                    'email' => Str::uuid()->toString() . Str::random() . '@example.com',
+                    'email_verified_at' => now(),
+                    'password' => '',
+                    'remember_token' => Str::random(10),
+                ];
+            }
+            
+            User::query()->insert($users);
         }
-        
-        User::query()->insert($users);
     }
 }
