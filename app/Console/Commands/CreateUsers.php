@@ -30,7 +30,7 @@ class CreateUsers extends Command
         
         for ($i = 0; $i < $count; $i++) {
             \App\Models\User::create([
-                'name' => fake()->name(),
+                'name' => Str::random(),
                 'email' => Str::uuid()->toString() . Str::random() . '@example.com',
                 'email_verified_at' => now(),
                 'password' => '',
