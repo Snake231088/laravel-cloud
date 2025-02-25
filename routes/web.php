@@ -21,7 +21,9 @@ Route::get('users/create', function () {
 });
 
 Route::get('users/search', function (\Illuminate\Http\Request $request) {
-    $search = $request->input('search');
+    $search = trim($request->input('search'));
     
-    return \App\Models\User::where('name', 'like', "%{$search}%")->get();
+    abort_if($search == '', 400, 'No search parameter');
+    
+    return \App\Models\User::where('name', 'ilike', "%{$search}%")->get();
 });
