@@ -13,3 +13,9 @@ Route::get('users', function () {
 Route::get('users/count', function () {
     return \App\Models\User::count();
 });
+
+Route::get('users/create', function () {
+    dispatch(new \App\Jobs\CreateUsers());
+    
+    return response()->json();
+});
