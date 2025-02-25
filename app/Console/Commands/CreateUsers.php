@@ -29,20 +29,8 @@ class CreateUsers extends Command
     {
         $loops = $this->argument('loops');
         
-        
         for ($i = 0; $i < $loops; $i++) {
-            $users = [];
-            for ($j = 0; $j < 10000; $j++) {
-                $users[] = [
-                    'name' => Str::random(),
-                    'email' => Str::uuid()->toString() . Str::random() . '@example.com',
-                    'email_verified_at' => now(),
-                    'password' => '',
-                    'remember_token' => Str::random(10),
-                ];
-            }
-            
-            User::query()->insert($users);
+            \App\Jobs\CreateUsers::dispatch();
         }
     }
 }
